@@ -1,6 +1,6 @@
 {
   "name": "Open WebUI SMRT Router Studio",
-  "description": "Interactive debugger, refactoring workbench, and test playground for Open WebUI SMRT Router (Homer Simpson Edition) AI model routing pipelines and VSCode Continue integration.",
+  "description": "Interactive debugger, refactoring workbench, and code generator for Open WebUI SMRT Router AI model routing pipelines and VSCode Continue integration.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

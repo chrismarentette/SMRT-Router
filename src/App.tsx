@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Navbar, ActiveTab } from './components/Navbar';
 import { DiagnosticReport } from './components/DiagnosticReport';
 import { RefactoredEditor } from './components/RefactoredEditor';
-import { LiveRouterPlayground } from './components/LiveRouterPlayground';
 import { VSCodeContinueIntegration } from './components/VSCodeContinueIntegration';
 import { RouterValveConfig } from './types';
 import { 
   Sparkles, 
   Bug, 
   FileCode2, 
-  PlaySquare, 
   TerminalSquare, 
   CheckCircle2, 
   Cpu, 
@@ -78,7 +76,6 @@ export default function App() {
         {activeTab === 'editor' && (
           <RefactoredEditor config={config} onConfigChange={setConfig} />
         )}
-        {activeTab === 'playground' && <LiveRouterPlayground config={config} />}
         {activeTab === 'continue' && <VSCodeContinueIntegration config={config} />}
       </main>
 

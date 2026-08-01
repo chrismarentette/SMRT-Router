@@ -3,14 +3,13 @@ import {
   Cpu, 
   Bug, 
   FileCode2, 
-  PlaySquare, 
   TerminalSquare, 
   Sparkles, 
   CheckCircle2, 
   GitBranch 
 } from 'lucide-react';
 
-export type ActiveTab = 'diagnostics' | 'editor' | 'playground' | 'continue';
+export type ActiveTab = 'diagnostics' | 'editor' | 'continue';
 
 interface NavbarProps {
   activeTab: ActiveTab;
@@ -29,11 +28,6 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onTabChange, apiStatu
       id: 'editor',
       label: 'Pipelines',
       icon: <FileCode2 className="w-4 h-4 text-emerald-400" />
-    },
-    {
-      id: 'playground',
-      label: 'Live Test',
-      icon: <PlaySquare className="w-4 h-4 text-sky-400" />
     },
     {
       id: 'continue',
