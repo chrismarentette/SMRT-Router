@@ -85,42 +85,24 @@ export const RefactoredEditor: React.FC<RefactoredEditorProps> = ({ config, onCo
           </div>
 
           <div className="space-y-4">
-            {/* Ollama Base URL */}
+            {/* Ollama / Upstream Engine Base URL */}
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
-                  Ollama Engine Host URL
+                  Ollama / Upstream Engine URL
                 </label>
-                <span className="text-[10px] font-mono text-emerald-400">Port 11434</span>
+                <span className="text-[10px] font-mono text-emerald-400">Target Host</span>
               </div>
               <input
                 type="text"
                 value={config.ollamaBaseUrl}
                 onChange={(e) => updateField('ollamaBaseUrl', e.target.value)}
                 placeholder="http://host.docker.internal:11434"
-                className={`w-full bg-slate-950 border rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none font-mono transition ${
-                  config.ollamaBaseUrl.includes('9099')
-                    ? 'border-rose-500 focus:border-rose-400 text-rose-200'
-                    : 'border-slate-800 focus:border-indigo-500'
-                }`}
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-indigo-500 font-mono transition"
               />
               <p className="text-[11px] text-slate-400 mt-1">
-                Where Ollama is running (<code className="text-slate-300">http://host.docker.internal:11434</code> inside Docker/Pipelines).
+                Target endpoint or Ollama API host (e.g. <code className="text-slate-300">http://host.docker.internal:11434</code>, <code className="text-slate-300">http://localhost:9099</code>, etc.).
               </p>
-
-              {config.ollamaBaseUrl.includes('9099') && (
-                <div className="mt-2.5 p-3 rounded-xl bg-rose-950/80 border border-rose-800 text-rose-200 text-xs space-y-1">
-                  <div className="font-bold flex items-center space-x-1.5">
-                    <span>⚠️ Warning: Self-Recursion Loop Detected</span>
-                  </div>
-                  <p className="text-[11px] leading-relaxed">
-                    Port <code className="bg-rose-900/60 px-1 py-0.5 rounded text-white">9099</code> is the Pipelines Gateway container itself, NOT Ollama. Setting Ollama URL to port 9099 causes an infinite recursive loop.
-                  </p>
-                  <p className="text-[11px] font-semibold text-amber-300">
-                    Fix: Change this field to <code className="underline">http://host.docker.internal:11434</code> or <code className="underline">http://127.0.0.1:11434</code>.
-                  </p>
-                </div>
-              )}
             </div>
 
             {/* Tier 1: Reasoning Model */}

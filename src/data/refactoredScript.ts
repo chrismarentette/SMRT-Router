@@ -192,22 +192,19 @@ class Pipe:
 
     def _resolve_ollama_urls(self) -> List[str]:
         """
-        Auto-detects Ollama endpoints across Docker container boundaries, Open WebUI env vars, and localhost.
-        Fixes: 'http://localhost:11434 is currently offline or unreachable' inside Docker containers.
-        Guards against infinite loop recursion if OLLAMA_BASE_URL was accidentally set to Pipelines port 9099.
+        Auto-detects Ollama / OpenAI endpoints across Docker container boundaries, Open WebUI env vars, and localhost.
+        Respects the user's explicit Valve URL first and appends fallback candidates.
         """
-        raw_candidates = []
+        candidates = []
         if self.valves.OLLAMA_BASE_URL:
-            raw_candidates.append(self._clean_base_url(self.valves.OLLAMA_BASE_URL))
+            candidates.append(self._clean_base_url(self.valves.OLLAMA_BASE_URL))
+        
         env_url = os.environ.get("OLLAMA_BASE_URL") or os.environ.get("OLLAMA_BASE_URLS")
         if env_url:
             for u in env_url.split(";"):
                 clean = self._clean_base_url(u)
-                if clean and clean not in raw_candidates:
-                    raw_candidates.append(clean)
-
-        # Filter out Pipelines gateway port 9099 to prevent infinite self-recursion loop
-        candidates = [u for u in raw_candidates if ":9099" not in u and "9099" not in u]
+                if clean and clean not in candidates:
+                    candidates.append(clean)
 
         defaults = [
             "http://host.docker.internal:11434",
